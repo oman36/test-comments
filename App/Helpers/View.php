@@ -167,7 +167,7 @@ class View
         self::$_globalVars[$name] = $value;
     }
 
-    function responseJson($data, $statusCode = 200)
+    static function json($data, $statusCode = 200)
     {
         http_response_code($statusCode);
         header("Content-Type: text/json; charset=utf-8");
