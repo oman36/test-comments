@@ -1,0 +1,16 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <?= $comment['author'] ?>
+
+    </div>
+    <div class="panel-body">
+        <?= $comment["text"] ?>
+
+    </div><?php if (!empty($comment['children'])){ ?>
+        <div class="panel-footer">
+        <?php foreach ($comment['children'] as $child) {
+            \Helpers\View::render("home/comment", ["comment" => $child]);
+        } //foreach ($comment['children'] as $child)  ?>
+        </div><?php }//if (!empty($comment['children']))?>
+
+</div>

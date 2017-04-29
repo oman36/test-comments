@@ -3,5 +3,68 @@ use \Helpers\View as V;
 V::extend("layouts/main");
 V::startSection("content");
 ?>
-<div>Test</div>
-<?php V::endSection("content") ?>
+<div class="jumbotron">
+    <h1 class="text-center">Tabs or Spaces?</h1>
+    <h3 class="text-center">Holywar Started !</h3>
+</div>
+<?php
+$examples = [
+    [
+        "author" => "Author AA Name",
+        "text" => "Text text text text text text text text text text text" ,
+        "children" => [
+            [
+                "author" => "Author 77 Name",
+                "text" => "Text text text text text text text text text text text" ,
+            ],
+            [
+                "author" => "Author 88 Name",
+                "text" => "Text text text text text text text text text text text" ,
+            ],
+            [
+                "author" => "Author 99 Name",
+                "text" => "Text text text text text text text text text text text" ,
+            ],
+        ],
+    ],
+    [
+        "author" => "Author BB Name",
+        "text" => "Text text text text text text text text text text text" ,
+    ],
+    [
+        "author" => "Author CC Name",
+        "text" => "Text text text text text text text text text text text" ,
+        "children" => [
+            [
+                "author" => "Author 11 Name",
+                "text" => "Text text text text text text text text text text text" ,
+            ],
+            [
+                "author" => "Author 22 Name",
+                "text" => "Text text text text text text text text text text text" ,
+                "children" => [
+                    [
+                        "author" => "Author XX Name",
+                        "text" => "Text text text text text text text text text text text" ,
+                    ],
+                    [
+                        "author" => "Author YY Name",
+                        "text" => "Text text text text text text text text text text text" ,
+                    ],
+                    [
+                        "author" => "Author ZZ Name",
+                        "text" => "Text text text text text text text text text text text" ,
+                    ],
+                ],
+            ],
+            [
+                "author" => "Author 33 Name",
+                "text" => "Text text text text text text text text text text text" ,
+            ],
+        ],
+    ],
+];
+foreach ($examples as $example) {
+    V::render("home/comment",["comment" => $example]);
+}
+V::endSection("content") ?>
