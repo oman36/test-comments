@@ -1,1 +1,7 @@
-test
+<?php
+use \Helpers\View as V;
+V::extend("layouts/main");
+V::startSection("content");
+?>
+<div>Test</div>
+<?php V::endSection("content") ?>

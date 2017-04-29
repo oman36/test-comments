@@ -5,4 +5,11 @@ ini_set("display_errors",config("app.display_errors"));
 \Helpers\View::setPatternsFolder(ROOT . "/App/Views");
 session_start();
 
-require ROOT . "/App/route.php";
+try {
+    require ROOT . "/App/route.php";
+} catch (\Exception $e) {
+    if (env("DEBUG")) {
+        echo "<pre>";
+        throw $e;
+    }
+}
