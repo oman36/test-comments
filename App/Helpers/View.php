@@ -148,14 +148,14 @@ class View
         }
         require $file;
 
-        if (self::$_renderLevel === (count(self::$_extendsStack) + 1)) {
+        if (self::$_renderLevel > count(self::$_extendsStack)) {
             $tmp = ob_get_contents();
-            ob_clean();
+            ob_end_clean();
             self::$_renderLevel--;
             return $tmp;
         }
 
-        ob_end_flush();
+        ob_end_clean();
 
         self::$_renderLevel--;
         return self::make(array_shift(self::$_extendsStack),$vars);
