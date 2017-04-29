@@ -121,7 +121,7 @@ class View
 
         self::$_activeSection = false;
         self::$_globalVars[$name] = ob_get_contents();
-        ob_end_flush();
+        ob_clean();
         return true;
     }
 
@@ -142,7 +142,11 @@ class View
         extract(array_merge(self::$_globalVars, $vars));
         ob_start();
 
-        require self::$_patternsFolder . "{$pattern}.phtml";
+        $file = self::$_patternsFolder . "{$pattern}.phtml";
+        if (!file_exists($file)) {
+          throw new \Exception("File $file doesn't exist");
+        }
+        require $file;
 
         if (self::$_renderLevel === (count(self::$_extendsStack) + 1)) {
             $tmp = ob_get_contents();
@@ -153,9 +157,8 @@ class View
 
         ob_end_flush();
 
-        $tmp = self::make(array_shift(self::$_extendsStack),$vars);
         self::$_renderLevel--;
-        return $tmp;
+        return self::make(array_shift(self::$_extendsStack),$vars);
     }
 
     /**
