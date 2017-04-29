@@ -8,12 +8,13 @@
 
 namespace Controllers;
 
+use Helpers\View;
 
 class HomeController extends BaseController
 {
     public function index()
     {
-        echo "Index";
+        return View::render("home/index",[]);
     }
 
     public function error404()
