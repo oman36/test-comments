@@ -1,13 +1,23 @@
 <div class="panel panel-info">
     <div class="panel-heading">
-        <?= $comment['author'] ?>
-
+        <div class="row">
+            <div class="col-lg-6">
+                <?= $comment['author'] ?>
+            </div>
+            <div class="col-lg-6 text-right">
+                <?php if (!empty($comment['children'])){ ?>
+                    <b class="btn btn-success" data-toggle="collapse" data-target="#answer_<?= $comment['id']?> ">
+                        <?= count($comment['children']) ?>
+                    </b>
+                <?php }//if (!empty($comment['children'])) ?>
+            </div>
+        </div>
     </div>
     <div class="panel-body">
         <?= $comment["text"] ?>
 
     </div><?php if (!empty($comment['children'])){ ?>
-        <div class="panel-footer">
+        <div class="panel-footer collapse" id="answer_<?= $comment['id']?>">
         <?php foreach ($comment['children'] as $child) {
             \Helpers\View::render("home/comment", ["comment" => $child]);
         } //foreach ($comment['children'] as $child)  ?>
