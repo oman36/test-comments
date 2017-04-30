@@ -5,9 +5,11 @@
     <h4 class="comment-form__header">Добавить комментарий<br><br></h4>
     <div class="form-group comment-form__name-field">
         <input class="form-control" name="name" placeholder="Имя">
+        <div class="well-sm alert-danger comment-form__error-message"></div>
     </div>
     <div class="form-group comment-form__comment-field">
         <textarea class="form-control" name="comment" placeholder="Комментарий"></textarea>
+        <div class="well-sm alert-danger comment-form__error-message"></div>
     </div>
     <div class="text-right comment-form__btns">
         <input type="submit" class="btn btn-success" value="Отправить">

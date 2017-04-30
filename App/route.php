@@ -18,6 +18,11 @@ function callRoute($controller,$action = "index",$params = []) {
 try {
     if ("/" === $uri) {
         callRoute($controller, $action);
+    } elseif ("/test" === $uri) {
+        \Helpers\View::json([
+            'name' => "Fatal",
+            'comment' => "Error",
+        ],400);
     } else {
         callRoute("Home", "error404");
     }
