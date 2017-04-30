@@ -38,7 +38,8 @@ gulp.task('less', function () {
 gulp.task('js', function () {
     return gulp.src([
         'js/jquery-3.1.1.min.js',
-        'js/bootstrap.min.js'
+        'js/bootstrap.min.js',
+        'js/script.js',
     ])
         .pipe(gulpIf(!IS_PROD,sourcemaps.init()))
         .pipe(concat('script.js'))

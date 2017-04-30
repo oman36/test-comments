@@ -76,7 +76,14 @@ $examples = [
         ],
     ],
 ];
+?>
+<div class="panel panel-default" >
+    <div class="panel-body" >
+        <?= V::make("home/comment_form"); ?>
+    </div>
+</div>
+<?php
 foreach ($examples as $example) {
     V::render("home/comment",["comment" => $example]);
 }
-V::endSection("content") ?>
+V::endSection("content");

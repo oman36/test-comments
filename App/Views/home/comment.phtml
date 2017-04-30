@@ -6,7 +6,7 @@
             </div>
             <div class="col-lg-6 text-right">
                 <?php if (!empty($comment['children'])){ ?>
-                    <b class="btn btn-success" data-toggle="collapse" data-target="#answer_<?= $comment['id']?> ">
+                    <b class="btn btn-primary" data-toggle="collapse" data-target="#answer_<?= $comment['id']?> ">
                         <?= count($comment['children']) ?>
                     </b>
                 <?php }//if (!empty($comment['children'])) ?>
@@ -15,12 +15,14 @@
     </div>
     <div class="panel-body">
         <?= $comment["text"] ?>
-
-    </div><?php if (!empty($comment['children'])){ ?>
+        <hr>
+        <?= \Helpers\View::make("home/comment_form", ["id" => $comment['id']]); ?>
+    </div>
+    <?php if (!empty($comment['children'])){ ?>
         <div class="panel-footer collapse" id="answer_<?= $comment['id']?>">
-        <?php foreach ($comment['children'] as $child) {
-            \Helpers\View::render("home/comment", ["comment" => $child]);
-        } //foreach ($comment['children'] as $child)  ?>
-        </div><?php }//if (!empty($comment['children']))?>
-
+            <?php foreach ($comment['children'] as $child) {
+                \Helpers\View::render("home/comment", ["comment" => $child]);
+            } //foreach ($comment['children'] as $child)  ?>
+        </div>
+    <?php }//if (!empty($comment['children']))?>
 </div>
