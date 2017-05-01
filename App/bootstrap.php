@@ -2,7 +2,8 @@
 if (file_exists(ROOT . "/.env")) {
     $lines = file(ROOT . "/.env");
     foreach ($lines as $line) {
-        if (empty(trim($line))) {
+        $line = trim($line);
+        if (empty($line)) {
             continue;
         }
         putenv($line);
