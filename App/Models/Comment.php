@@ -54,4 +54,15 @@ class Comment extends Model
 
         return $comment;
     }
+
+    /**
+     * @return array|false
+     */
+    public static function getOnlyWithoutParents()
+    {
+        return self::query()
+            ->where("parent_id","=","0")
+            ->orderBy("created_at","DESC")
+            ->get();
+    }
 }
