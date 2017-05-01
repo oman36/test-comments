@@ -46,7 +46,7 @@ $(document).ready(function () {
             $(el).find('.comment-form__error-message').hide();
 
             $.ajax({
-                url : "/test",
+                url : "/comment",
                 data : data,
                 type : "post",
                 dataType : "json",

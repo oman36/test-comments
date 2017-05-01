@@ -18,6 +18,8 @@ function callRoute($controller,$action = "index",$params = []) {
 try {
     if ("/" === $uri) {
         callRoute($controller, $action);
+    } elseif ("/comment" === $uri && "POST" === $_SERVER['REQUEST_METHOD']) {
+        callRoute("Comment", "store");
     } elseif ("/test" === $uri) {
         \Helpers\View::json([
             'name' => "Fatal",
