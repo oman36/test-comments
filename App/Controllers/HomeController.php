@@ -9,12 +9,20 @@
 namespace Controllers;
 
 use Helpers\View;
+use Models\Comment;
 
 class HomeController extends BaseController
 {
     public function index()
     {
-        return View::render("home/index",[]);
+        $comments = Comment::getOnlyWithoutParents();
+
+        foreach ($comments as $i => $comment) {
+            $comments[$i] = Comment::prepareChildren($comment);
+        }
+        return View::render("home/index",[
+            "comments" => $comments
+        ]);
     }
 
     public function error404()

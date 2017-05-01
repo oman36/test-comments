@@ -7,83 +7,14 @@ V::startSection("content");
     <h1 class="text-center">Tabs or Spaces?</h1>
     <h3 class="text-center">Holywar Started !</h3>
 </div>
-<?php
-$examples = [
-    [
-        "id" => "1",
-        "author" => "Author AA Name",
-        "text" => "Text text text text text text text text text text text" ,
-        "children" => [
-            [
-                "id" => "2",
-                "author" => "Author 77 Name",
-                "text" => "Text text text text text text text text text text text" ,
-            ],
-            [
-                "id" => "3",
-                "author" => "Author 88 Name",
-                "text" => "Text text text text text text text text text text text" ,
-            ],
-            [
-                "id" => "4",
-                "author" => "Author 99 Name",
-                "text" => "Text text text text text text text text text text text" ,
-            ],
-        ],
-    ],
-    [
-        "id" => "5",
-        "author" => "Author BB Name",
-        "text" => "Text text text text text text text text text text text" ,
-    ],
-    [
-        "id" => "6",
-        "author" => "Author CC Name",
-        "text" => "Text text text text text text text text text text text" ,
-        "children" => [
-            [
-                "id" => "7",
-                "author" => "Author 11 Name",
-                "text" => "Text text text text text text text text text text text" ,
-            ],
-            [
-                "id" => "8",
-                "author" => "Author 22 Name",
-                "text" => "Text text text text text text text text text text text" ,
-                "children" => [
-                    [
-                        "id" => "9",
-                        "author" => "Author XX Name",
-                        "text" => "Text text text text text text text text text text text" ,
-                    ],
-                    [
-                        "id" => "10",
-                        "author" => "Author YY Name",
-                        "text" => "Text text text text text text text text text text text" ,
-                    ],
-                    [
-                        "id" => "11",
-                        "author" => "Author ZZ Name",
-                        "text" => "Text text text text text text text text text text text" ,
-                    ],
-                ],
-            ],
-            [
-                "id" => "12",
-                "author" => "Author 33 Name",
-                "text" => "Text text text text text text text text text text text" ,
-            ],
-        ],
-    ],
-];
-?>
 <div class="panel panel-default" >
     <div class="panel-body" >
         <?= V::make("home/comment_form"); ?>
     </div>
 </div>
 <?php
-foreach ($examples as $example) {
+
+foreach ($comments as $example) {
     V::render("home/comment",["comment" => $example]);
 }
 V::endSection("content");
