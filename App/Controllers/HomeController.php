@@ -15,7 +15,10 @@ class HomeController extends BaseController
 {
     public function index()
     {
-        $comments = Comment::getOnlyWithoutParents();
+        $comments = Comment::getOnlyWithoutParents()
+            ->orderBy("created_at","DESC")
+            ->limit(20)
+            ->get();
 
         foreach ($comments as $i => $comment) {
             $comments[$i] = Comment::prepareChildren($comment);

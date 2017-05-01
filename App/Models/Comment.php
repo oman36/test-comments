@@ -56,13 +56,11 @@ class Comment extends Model
     }
 
     /**
-     * @return array|false
+     * @return \Helpers\DB
      */
     public static function getOnlyWithoutParents()
     {
         return self::query()
-            ->where("parent_id","=","0")
-            ->orderBy("created_at","DESC")
-            ->get();
+            ->where("parent_id","=","0");
     }
 }

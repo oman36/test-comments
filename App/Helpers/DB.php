@@ -29,6 +29,7 @@ class DB
     private $_whereOr = [];
     private $_prepared = [];
     private $_orderBy = [];
+    private $_limit = "";
 
     static function connect($database, $host = "localhost", $port = 3306, $user = "root", $pass = "root")
     {
@@ -156,10 +157,11 @@ class DB
         foreach ($this->_prepared as $name => $value) {
             $query->bindValue($name,$value);
         }
+
         if ($query->execute()) {
             return $query->fetchAll(\PDO::FETCH_ASSOC);
         } else {
-            return false;
+            throw new \PDOException($query->errorInfo()[2]);
         }
 
     }
@@ -196,6 +198,10 @@ class DB
                 $orders[] = $field . " " . $direction;
             }
             $sql .= implode(",",$orders);
+        }
+        
+        if(!empty($this->_limit)) {
+            $sql .= " LIMIT {$this->_limit}";
         }
         return $sql;
     }
@@ -235,6 +241,16 @@ class DB
             $this->_orderBy[$name] = $direction;
         }
 
+        return $this;
+    }
+
+    /**
+     * @param string $limit
+     * @return $this
+     */
+    public function limit($limit)
+    {
+        $this->_limit = $limit;
         return $this;
     }
 }
