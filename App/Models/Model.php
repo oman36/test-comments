@@ -35,11 +35,14 @@ class Model
      */
     public static function find($id)
     {
-        $query = DB::getConnection()->prepare("SELECT * FROM :table WHERE `id`=:id");
-        $query->bindValue("table",self::_getTable());
+        $query = DB::getConnection()->prepare("SELECT * FROM `" .
+            self::_getTable() ."` WHERE `id`=:id");
         $query->bindValue("id",$id);
-        $query->execute();
-        return $query->fetchObject(self::class);
+        if ($query->execute()) {
+            return $query->fetchObject(self::class);
+        } else {
+            throw new \PDOException($query->errorInfo()[2]);
+        }
     }
 
     /**

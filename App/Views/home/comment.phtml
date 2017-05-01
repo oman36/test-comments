@@ -1,17 +1,25 @@
 <?php $comment = (array) $comment;?>
-<div class="panel panel-info">
+<div class="panel panel-info comment">
     <div class="panel-heading">
         <div class="row">
             <div class="col-lg-6">
-                <?= $comment['author'] ?>
+                <?= $comment['author'] ?> |
+                <?= date_create_from_format("Y-m-d H:i:s",$comment['created_at'])->format("d.m.Y H:i:s")?>
             </div>
             <div class="col-lg-6 text-right">
-                <?php if (!empty($comment['children'])){ ?>
-                    <b class="btn btn-primary" data-toggle="collapse" data-target="#answer_<?= $comment['id']?> ">
-                        <?= count($comment['children']) ?>
-                        &nbsp;<span class="glyphicon glyphicon-comment "></span>
-                    </b>
-                <?php }//if (!empty($comment['children'])) ?>
+                <b
+                        class="btn btn-primary"
+                        data-toggle="collapse"
+                        data-target="#answer_<?= $comment['id']?>"
+                        <?php if (empty($comment['children'])){ ?>
+                            style="display: none;"
+                        <?php }//if (!empty($comment['children'])) ?>
+                >
+                    <span class="comment-children-amount">
+                        <?= empty($comment['children']) ? "0" : count($comment['children']) ?>
+                    </span>
+                    &nbsp;<span class="glyphicon glyphicon-comment "></span>
+                </b>
             </div>
         </div>
     </div>
@@ -20,11 +28,12 @@
         <hr>
         <?= \Helpers\View::make("home/comment_form", ["id" => $comment['id']]); ?>
     </div>
-    <?php if (!empty($comment['children'])){ ?>
-        <div class="panel-footer collapse" id="answer_<?= $comment['id']?>">
-            <?php foreach ($comment['children'] as $child) {
+    <div class="panel-footer collapse" id="answer_<?= $comment['id']?>">
+        <?php if (!empty($comment['children'])){
+            foreach ($comment['children'] as $child) {
                 \Helpers\View::render("home/comment", ["comment" => $child]);
-            } //foreach ($comment['children'] as $child)  ?>
-        </div>
-    <?php }//if (!empty($comment['children']))?>
+            }
+        }
+        ?>
+    </div>
 </div>

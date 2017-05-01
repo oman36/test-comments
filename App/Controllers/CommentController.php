@@ -54,6 +54,7 @@ class CommentController extends BaseController
 
         return View::json([
             "id" => $comment->id,
+            "html" => View::make("home/comment",['comment' => $comment]),
         ],201);
     }
 
