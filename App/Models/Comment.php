@@ -23,6 +23,7 @@ class Comment extends Model
     {
         $children = self::query()
             ->where("parent_id","=",$this->id)
+            ->orderBy("created_at","DESC")
             ->get();
 
         if (empty($children)) {
