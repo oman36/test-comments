@@ -1,10 +1,10 @@
 <form action="" class="comment-form">
     <?php if (!empty($id)) {?>
-        <input type="hidden" id="<?= $id ?>">
+        <input type="hidden" name="parent_id" value="<?= $id ?>">
     <?php }//if (!empty($id))?>
     <h4 class="comment-form__header">Добавить комментарий<br><br></h4>
     <div class="form-group comment-form__name-field">
-        <input class="form-control" name="name" placeholder="Имя">
+        <input class="form-control" name="author" placeholder="Имя">
         <div class="well-sm alert-danger comment-form__error-message"></div>
     </div>
     <div class="form-group comment-form__comment-field">
