@@ -34,4 +34,23 @@ class Comment extends Model
 
         return $children;
     }
+
+    /**
+     * @param array | Comment $comment
+     * @return Comment
+     */
+    public static function prepareChildren($comment) {
+        if (!$comment instanceof self) {
+            $comment = new self($comment);
+        }
+        $children = $comment->getChildren();
+
+        if ($children) {
+            foreach ($children as $child) {
+                $comment->{"children"}[] = self::prepareChildren($child);
+            }
+        }
+
+        return $comment;
+    }
 }
