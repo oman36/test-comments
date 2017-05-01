@@ -28,6 +28,7 @@ class DB
     private $_where = [];
     private $_whereOr = [];
     private $_prepared = [];
+    private $_orderBy = [];
 
     static function connect($database, $host = "localhost", $port = 3306, $user = "root", $pass = "root")
     {
@@ -47,8 +48,11 @@ class DB
         return self::$_connection;
     }
 
-
-
+    /**
+     * @param string $table
+     * @param array $data
+     * @return string | false
+     */
     public static function insert($table,$data)
     {
         $sql = "INSERT INTO `{$table}`";
@@ -184,6 +188,15 @@ class DB
             $conditions = $this->prepareWhere($this->_where);
             $sql .= implode(" OR ", $conditions);
         }
+
+        if ($this->_orderBy) {
+            $sql .= " ORDER BY ";
+            $orders = [];
+            foreach ($this->_orderBy as $field => $direction) {
+                $orders[] = $field . " " . $direction;
+            }
+            $sql .= implode(",",$orders);
+        }
         return $sql;
     }
 
@@ -204,5 +217,24 @@ class DB
     public static function query()
     {
         return new self();
+    }
+
+    /**
+     * @param array | string $field
+     * @param string $direction
+     *
+     * @return $this
+     */
+    public function orderBy($field, $direction = "ASC")
+    {
+        if (!is_array($field)) {
+            $field = [$field => $direction];
+        }
+
+        foreach ($field as $name => $direction) {
+            $this->_orderBy[$name] = $direction;
+        }
+
+        return $this;
     }
 }
