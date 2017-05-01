@@ -6,6 +6,13 @@ try {
     ini_set("display_errors",config("app.display_errors"));
     \Helpers\View::setPatternsFolder(ROOT . "/App/Views");
     session_start();
+    \Helpers\DB::connect(
+        env("MYSQL_DATABASE"),
+        env("MYSQL_HOST"),
+        env("MYSQL_PORT"),
+        env("MYSQL_USER"),
+        env("MYSQL_PASS")
+    );
 
     require ROOT . "/App/route.php";
 
