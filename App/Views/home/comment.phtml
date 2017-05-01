@@ -1,3 +1,4 @@
+<?php $comment = (array) $comment;?>
 <div class="panel panel-info">
     <div class="panel-heading">
         <div class="row">
@@ -8,13 +9,14 @@
                 <?php if (!empty($comment['children'])){ ?>
                     <b class="btn btn-primary" data-toggle="collapse" data-target="#answer_<?= $comment['id']?> ">
                         <?= count($comment['children']) ?>
+                        &nbsp;<span class="glyphicon glyphicon-comment "></span>
                     </b>
                 <?php }//if (!empty($comment['children'])) ?>
             </div>
         </div>
     </div>
     <div class="panel-body">
-        <?= $comment["text"] ?>
+        <?= $comment["comment"] ?>
         <hr>
         <?= \Helpers\View::make("home/comment_form", ["id" => $comment['id']]); ?>
     </div>
