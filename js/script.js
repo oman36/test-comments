@@ -72,6 +72,7 @@ $(document).ready(function () {
                     if ("none" === $('#answer_' + id).css('display')) {
                         btn.click();
                     }
+                    $(form)[0].reset();
                 },
                 error : function(data) {
                     switch (data.status) {
