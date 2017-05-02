@@ -7,14 +7,17 @@ V::startSection("content");
     <h1 class="text-center">Tabs or Spaces?</h1>
     <h3 class="text-center">Holywar Started !</h3>
 </div>
-<div class="panel panel-default" >
+<div class="panel panel-default comment" >
     <div class="panel-body" >
         <?= V::make("home/comment_form"); ?>
     </div>
-</div>
+    <div class="panel-footer" >
 <?php
 
 foreach ($comments as $example) {
     V::render("home/comment",["comment" => $example]);
 }
+?>
+</div>
+<?php
 V::endSection("content");
