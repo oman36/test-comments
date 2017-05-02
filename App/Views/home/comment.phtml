@@ -3,7 +3,7 @@
     <div class="panel-heading">
         <div class="row">
             <div class="col-lg-6">
-                <?= $comment['author'] ?> |
+                <?= htmlentities($comment['author']) ?> |
                 <?= date_create_from_format("Y-m-d H:i:s",$comment['created_at'])->format("d.m.Y H:i:s")?>
             </div>
             <div class="col-lg-6 text-right">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="panel-body">
-        <?= $comment["comment"] ?>
+        <?= htmlentities($comment["comment"]) ?>
         <hr>
         <?= \Helpers\View::make("home/comment_form", ["id" => $comment['id']]); ?>
     </div>
